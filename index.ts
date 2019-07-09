@@ -54,9 +54,7 @@ function connnectSocketIO() {
       console.log('Client disconnected');
     });
 
-    socket.on('track', (data: any) => {
-      console.log('Track:', data);
-    });
+    socket.on('track', (data: any) => socket.emit('new_track', data));
   });
 }
 

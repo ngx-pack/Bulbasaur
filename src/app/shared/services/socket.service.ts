@@ -14,13 +14,9 @@ export class SocketService {
     this.socket = socketIo(SERVER_URL, { transports: ['websocket', 'polling'] });
   }
 
-  public send(message: ITrack): void {
-    this.socket.emit('track', message);
-  }
-
   public onMessage(): Observable<ITrack> {
     return new Observable<ITrack>((observer) => {
-      this.socket.on('track', (data: ITrack) => observer.next(data));
+      this.socket.on('new_track', (data: ITrack) => observer.next(data));
     });
   }
 
